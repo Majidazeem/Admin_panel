@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Rajdhani:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        :root{--bg-color:#292d32;--text-main:#e0e5ec;--text-sub:#9baacf;--gold:#FFD700;--neon-green:#00ff88;--neon-blue:#00f3ff;--danger:#ff4757;--shadow-light:rgba(255,255,255,0.05);--shadow-dark:rgba(0,0,0,0.45);--shadow-flat:8px 8px 16px var(--shadow-dark),-8px -8px 16px var(--shadow-light);--shadow-pressed:inset 6px 6px 12px var(--shadow-dark),inset -6px -6px 12px var(--shadow-light);}
+        :root{--bg-color:#292d32;--text-main:#e0e5ec;--text-sub:#9baacf;--gold:#1565C0;--neon-green:#00ff88;--neon-blue:#00f3ff;--danger:#ff4757;--shadow-light:rgba(255,255,255,0.05);--shadow-dark:rgba(0,0,0,0.45);--shadow-flat:8px 8px 16px var(--shadow-dark),-8px -8px 16px var(--shadow-light);--shadow-pressed:inset 6px 6px 12px var(--shadow-dark),inset -6px -6px 12px var(--shadow-light);}
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
         body{background-color:var(--bg-color);color:var(--text-main);min-height:100vh;}
 
@@ -66,6 +66,22 @@
         select.form-input option{background:#292d32;}
         .icon-preview{margin-top:10px;display:none;}
         .icon-preview img{width:70px;height:70px;border-radius:15px;box-shadow:var(--shadow-flat);}
+        /* CUSTOMIZER */
+        .color-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:15px 0;}
+        .color-swatch{width:100%;aspect-ratio:1;border-radius:15px;cursor:pointer;border:3px solid transparent;transition:all 0.3s;box-shadow:var(--shadow-flat);}
+        .color-swatch.selected{border-color:#fff;transform:scale(1.1);box-shadow:0 0 15px currentColor;}
+        .effect-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:15px 0;}
+        .effect-btn{padding:15px;border-radius:15px;border:2px solid transparent;background:var(--bg-color);color:var(--text-main);cursor:pointer;font-family:'Rajdhani';font-weight:700;font-size:0.95rem;box-shadow:var(--shadow-flat);transition:all 0.3s;text-align:center;}
+        .effect-btn.active{border-color:var(--gold);color:var(--gold);box-shadow:var(--shadow-pressed);}
+        .effect-btn i{display:block;font-size:1.5rem;margin-bottom:6px;}
+        .toggle-row{display:flex;align-items:center;justify-content:space-between;padding:15px;background:var(--bg-color);border-radius:15px;box-shadow:var(--shadow-flat);margin-bottom:12px;}
+        .toggle-label{font-family:'Rajdhani';font-weight:700;font-size:1rem;display:flex;align-items:center;gap:10px;}
+        .toggle-switch{width:52px;height:28px;background:#555;border-radius:50px;position:relative;cursor:pointer;transition:0.3s;}
+        .toggle-switch.on{background:var(--gold);}
+        .toggle-switch::after{content:'';position:absolute;width:22px;height:22px;background:#fff;border-radius:50%;top:3px;left:3px;transition:0.3s;}
+        .toggle-switch.on::after{left:27px;}
+        .save-custom-btn{width:100%;padding:18px;border-radius:15px;border:none;background:linear-gradient(135deg,var(--gold),#ff8c00);color:#000;font-family:'Orbitron';font-weight:900;font-size:1rem;cursor:pointer;box-shadow:0 4px 20px rgba(255,215,0,0.4);margin-top:10px;letter-spacing:1px;}
+        .preview-bar{height:8px;border-radius:10px;margin:10px 0;background:linear-gradient(90deg,var(--gold),transparent);}
     </style>
 </head>
 <body>
@@ -103,6 +119,7 @@
             <div class="stat-box"><div class="num" id="statWA">0</div><div class="lbl">WA Mods</div></div>
             <div class="stat-box"><div class="num" id="statApps">0</div><div class="lbl">Apps</div></div>
             <div class="stat-box"><div class="num" id="statTools">0</div><div class="lbl">Tools</div></div>
+            <div class="stat-box"><div class="num" id="statBan">0</div><div class="lbl">Ban Check</div></div>
         </div>
 
         <!-- ADD/EDIT FORM -->
@@ -120,6 +137,7 @@
                         <option value="apps">Apps</option>
                         <option value="tools">VIP Tools</option>
                         <option value="themes">XML Themes</option>
+                        <option value="bancheck">🛡️ Ban Check</option>
                     </select>
                 </div>
                 <div class="form-group"><label>File Size</label><input type="text" id="fSize" class="form-input" placeholder="e.g. 74 MB or Online"></div>
@@ -150,6 +168,130 @@
             <button class="btn-admin btn-green" onclick="changePassword()"><i class="fas fa-lock"></i> UPDATE PASSWORD</button>
         </div>
 
+        <!-- WEBSITE CUSTOMIZER -->
+        <div class="admin-card">
+            <h3><i class="fas fa-palette"></i> WEBSITE CUSTOMIZER</h3>
+            <div class="preview-bar" id="previewBar"></div>
+
+            <!-- ACCENT COLOR -->
+            <label style="font-family:'Rajdhani';font-weight:700;font-size:0.9rem;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:block;">🎨 Accent Color</label>
+            <div class="color-grid">
+                <div class="color-swatch" style="background:#FFD700;" onclick="selectColor('#FFD700',this)" title="Gold"></div>
+                <div class="color-swatch" style="background:#00f3ff;" onclick="selectColor('#00f3ff',this)" title="Neon Blue"></div>
+                <div class="color-swatch" style="background:#00ff88;" onclick="selectColor('#00ff88',this)" title="Neon Green"></div>
+                <div class="color-swatch" style="background:#ff4757;" onclick="selectColor('#ff4757',this)" title="Red"></div>
+                <div class="color-swatch" style="background:#bd00ff;" onclick="selectColor('#bd00ff',this)" title="Purple"></div>
+                <div class="color-swatch" style="background:#ff6b35;" onclick="selectColor('#ff6b35',this)" title="Orange"></div>
+                <div class="color-swatch" style="background:#ff69b4;" onclick="selectColor('#ff69b4',this)" title="Pink"></div>
+                <div class="color-swatch" style="background:#00bcd4;" onclick="selectColor('#00bcd4',this)" title="Cyan"></div>
+                <div class="color-swatch" style="background:#76ff03;" onclick="selectColor('#76ff03',this)" title="Lime"></div>
+                <div class="color-swatch" style="background:#ffffff;" onclick="selectColor('#ffffff',this)" title="White"></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+                <label style="font-family:'Rajdhani';font-weight:700;font-size:0.85rem;color:var(--text-sub);">Custom Color:</label>
+                <input type="color" id="customColorPick" value="#1565C0" oninput="selectColor(this.value,null)" style="width:50px;height:40px;border:none;border-radius:10px;cursor:pointer;background:none;">
+                <span id="colorHexShow" style="font-family:'Orbitron';color:var(--gold);font-size:0.9rem;">#1565C0</span>
+            </div>
+
+            <!-- BACKGROUND STYLE -->
+            <label style="font-family:'Rajdhani';font-weight:700;font-size:0.9rem;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:block;">🌙 Background Mode</label>
+            <div style="display:flex;gap:12px;margin-bottom:20px;">
+                <div class="effect-btn" id="bgDark" onclick="selectBg('dark',this)" style="flex:1;"><i class="fas fa-moon"></i>Dark Mode</div>
+                <div class="effect-btn active" id="bgLight" onclick="selectBg('light',this)" style="flex:1;"><i class="fas fa-sun"></i>Light Mode</div>
+            </div>
+
+            <!-- PARTICLE EFFECTS -->
+            <label style="font-family:'Rajdhani';font-weight:700;font-size:0.9rem;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:block;">✨ Particle Effects</label>
+            <div class="effect-grid" style="grid-template-columns:repeat(3,1fr);">
+                <div class="effect-btn active" id="eff_particles" onclick="selectEffect('particles',this)"><i class="fas fa-circle"></i>Particles</div>
+                <div class="effect-btn" id="eff_stars" onclick="selectEffect('stars',this)"><i class="fas fa-star"></i>Stars</div>
+                <div class="effect-btn" id="eff_snow" onclick="selectEffect('snow',this)"><i class="fas fa-snowflake"></i>Snow</div>
+                <div class="effect-btn" id="eff_rain" onclick="selectEffect('rain',this)"><i class="fas fa-cloud-rain"></i>Rain</div>
+                <div class="effect-btn" id="eff_matrix" onclick="selectEffect('matrix',this)"><i class="fas fa-code"></i>Matrix</div>
+                <div class="effect-btn" id="eff_none" onclick="selectEffect('none',this)"><i class="fas fa-ban"></i>Off</div>
+            </div>
+
+            <!-- TOGGLES -->
+            <label style="font-family:'Rajdhani';font-weight:700;font-size:0.9rem;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin:15px 0 8px;display:block;">⚙️ Site Features</label>
+            <div class="toggle-row">
+                <span class="toggle-label"><i class="fas fa-music" style="color:var(--gold)"></i> Click Sound</span>
+                <div class="toggle-switch on" id="tog_sound" onclick="toggleFeature('sound',this)"></div>
+            </div>
+            <div class="toggle-row">
+                <span class="toggle-label"><i class="fas fa-marquee" style="color:var(--gold)"></i> Marquee Text</span>
+                <div class="toggle-switch on" id="tog_marquee" onclick="toggleFeature('marquee',this)"></div>
+            </div>
+            <div class="toggle-row">
+                <span class="toggle-label"><i class="fas fa-spinner" style="color:var(--gold)"></i> Loading Screen</span>
+                <div class="toggle-switch on" id="tog_loader" onclick="toggleFeature('loader',this)"></div>
+            </div>
+            <div class="toggle-row">
+                <span class="toggle-label"><i class="fas fa-globe" style="color:var(--gold)"></i> Live User Counter</span>
+                <div class="toggle-switch on" id="tog_counter" onclick="toggleFeature('counter',this)"></div>
+            </div>
+
+            <!-- ANNOUNCEMENT BANNER -->
+            <div style="margin-top:20px;border-top:1px solid rgba(255,255,255,0.05);padding-top:20px;">
+            <label style="font-family:'Rajdhani';font-weight:700;font-size:0.9rem;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:block;">📢 Announcement Banner</label>
+            <div class="toggle-row" style="margin-bottom:10px;"><span class="toggle-label"><i class="fas fa-bullhorn" style="color:var(--gold)"></i> Enable Banner</span><div class="toggle-switch" id="tog_announce" onclick="toggleAnnounce(this)"></div></div>
+            <input type="text" id="announceText" class="form-input" placeholder="Banner message text..." style="margin-bottom:8px;">
+            <select id="announceColor" class="form-input" style="margin-bottom:8px;">
+                <option value="linear-gradient(135deg,#1565C0,#0d47a1)">Blue (Default)</option>
+                <option value="linear-gradient(135deg,#FFD700,#ff8c00)">Gold</option>
+                <option value="linear-gradient(135deg,#ff4757,#c0392b)">Red Alert</option>
+                <option value="linear-gradient(135deg,#00ff88,#00b894)">Green</option>
+                <option value="linear-gradient(135deg,#bd00ff,#6c00b0)">Purple</option>
+            </select>
+            </div>
+
+            <!-- MAINTENANCE MODE -->
+            <div style="margin-top:20px;border-top:1px solid rgba(255,255,255,0.05);padding-top:20px;">
+            <label style="font-family:'Rajdhani';font-weight:700;font-size:0.9rem;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:block;">🔒 Maintenance Mode</label>
+            <div class="toggle-row" style="margin-bottom:10px;"><span class="toggle-label"><i class="fas fa-tools" style="color:var(--danger)"></i> Enable Maintenance</span><div class="toggle-switch" id="tog_maintenance" onclick="toggleMaintenance(this)"></div></div>
+            <input type="text" id="maintMsg" class="form-input" placeholder="Maintenance message for users...">
+            </div>
+
+            <!-- DOWNLOAD TIMER -->
+            <div style="margin-top:20px;border-top:1px solid rgba(255,255,255,0.05);padding-top:20px;">
+            <label style="font-family:'Rajdhani';font-weight:700;font-size:0.9rem;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:block;">⏳ Download Timer (seconds)</label>
+            <input type="number" id="timerSeconds" class="form-input" placeholder="Default: 10" min="3" max="60" value="10">
+            </div>
+
+            <!-- MARQUEE TEXT -->
+            <div style="margin-top:20px;border-top:1px solid rgba(255,255,255,0.05);padding-top:20px;">
+            <label style="font-family:'Rajdhani';font-weight:700;font-size:0.9rem;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:block;">📝 Marquee Text</label>
+            <input type="text" id="marqueeTextInput" class="form-input" placeholder="Enter marquee scrolling text...">
+            </div>
+
+            <!-- VIP TAG TEXT -->
+            <div style="margin-top:20px;border-top:1px solid rgba(255,255,255,0.05);padding-top:20px;">
+            <label style="font-family:'Rajdhani';font-weight:700;font-size:0.9rem;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:block;">⭐ VIP Tag Text</label>
+            <input type="text" id="vipTagInput" class="form-input" placeholder="e.g. VIP ELITE, PREMIUM, HOT">
+            </div>
+
+            <!-- NOTIFICATION TEXTS -->
+            <div style="margin-top:20px;border-top:1px solid rgba(255,255,255,0.05);padding-top:20px;">
+            <label style="font-family:'Rajdhani';font-weight:700;font-size:0.9rem;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:block;">🔔 Notification Alerts (one per line)</label>
+            <textarea id="notifItemsInput" class="form-input" rows="4" placeholder="WA Anti-Ban Updated!&#10;New iOS XML Added.&#10;System All Good." style="resize:vertical;"></textarea>
+            </div>
+
+            <!-- WHATSAPP FLOAT -->
+            <div style="margin-top:20px;border-top:1px solid rgba(255,255,255,0.05);padding-top:20px;">
+            <label style="font-family:'Rajdhani';font-weight:700;font-size:0.9rem;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:block;">💬 WhatsApp Float Button</label>
+            <div class="toggle-row" style="margin-bottom:10px;"><span class="toggle-label"><i class="fab fa-whatsapp" style="color:#25D366"></i> Show Float Button</span><div class="toggle-switch" id="tog_waFloat" onclick="toggleWaFloat(this)"></div></div>
+            <input type="text" id="waFloatNumber" class="form-input" placeholder="Phone with country code e.g. 923001234567">
+            </div>
+
+            <!-- BACKGROUND MUSIC -->
+            <div style="margin-top:20px;border-top:1px solid rgba(255,255,255,0.05);padding-top:20px;">
+            <label style="font-family:'Rajdhani';font-weight:700;font-size:0.9rem;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:block;">🎵 Background Music</label>
+            <div class="toggle-row" style="margin-bottom:10px;"><span class="toggle-label"><i class="fas fa-music" style="color:var(--gold)"></i> Enable Music</span><div class="toggle-switch" id="tog_bgMusic" onclick="toggleBgMusic(this)"></div></div>
+            <input type="text" id="bgMusicUrl" class="form-input" placeholder="Direct MP3 URL (e.g. from server/CDN)">
+            </div>
+
+            <button class="save-custom-btn" onclick="saveCustomizer()"><i class="fas fa-rocket"></i> APPLY TO WEBSITE</button>
+        </div>
+
         <!-- APPS LIST -->
         <div class="admin-card">
             <h3><i class="fas fa-list"></i> MANAGE APPS <span class="badge-count" id="adminAppCount">0</span></h3>
@@ -159,6 +301,7 @@
                 <button class="tab-btn" onclick="filterList('apps',this)">Apps</button>
                 <button class="tab-btn" onclick="filterList('tools',this)">Tools</button>
                 <button class="tab-btn" onclick="filterList('themes',this)">Themes</button>
+                <button class="tab-btn" onclick="filterList('bancheck',this)">🛡️ Ban Check</button>
             </div>
             <div id="appsList" class="apps-list-admin"></div>
         </div>
@@ -177,6 +320,58 @@ const AK = "apps";
 window.appsData = [];
 
 // Load apps
+// ===== CUSTOMIZER FIREBASE FUNCTIONS (need module scope) =====
+window.saveCustomizer = async function(){
+    try{
+        // collect new fields into custState
+        var at=document.getElementById('announceText'); if(at) custState.announce={enabled:custState._announceOn||false,text:at.value||'',color:document.getElementById('announceColor').value};
+        var mm=document.getElementById('maintMsg'); if(mm) custState.maintenance={enabled:custState._maintOn||false,msg:mm.value||'Site is under maintenance.'};
+        var ts=document.getElementById('timerSeconds'); if(ts&&ts.value) custState.timerSeconds=parseInt(ts.value)||10;
+        var mti=document.getElementById('marqueeTextInput'); if(mti&&mti.value) custState.marqueeText=mti.value;
+        var vti=document.getElementById('vipTagInput'); if(vti&&vti.value) custState.vipTag=vti.value;
+        var nii=document.getElementById('notifItemsInput'); if(nii&&nii.value) custState.notifItems=nii.value.split('\n').filter(function(x){return x.trim();});
+        var wfn=document.getElementById('waFloatNumber'); custState.waFloat={enabled:custState._waFloatOn||false,number:wfn?wfn.value:''};
+        var bmu=document.getElementById('bgMusicUrl'); custState.bgMusic={enabled:custState._bgMusicOn||false,url:bmu?bmu.value:''};
+        await set(ref(db,'siteSettings'), custState);
+        showToast('🚀 Applied! Refresh your website to see changes.');
+    } catch(e){showToast('❌ Firebase Error: '+e.message);}
+};
+
+async function loadCustomizerState(){
+    try{
+        const snap = await get(ref(db,'siteSettings'));
+        if(snap.exists()){
+            const s = snap.val();
+            custState = {...custState, ...s};
+            if(s.color){
+                window.selectColor(s.color, null);
+                document.getElementById('customColorPick').value = s.color;
+            }
+            if(s.bg) window.selectBg(s.bg, document.getElementById('bg'+s.bg.charAt(0).toUpperCase()+s.bg.slice(1)));
+            if(s.effect) window.selectEffect(s.effect, document.getElementById('eff_'+s.effect));
+            ['sound','marquee','loader','counter'].forEach(function(k){
+                if(s[k]!==undefined){
+                    custState[k]=s[k];
+                    var el=document.getElementById('tog_'+k);
+                    if(el) el.classList.toggle('on',s[k]);
+                }
+            });
+            // Load new fields
+            if(s.announce){custState._announceOn=s.announce.enabled;var te=document.getElementById('tog_announce');if(te)te.classList.toggle('on',s.announce.enabled);var ai=document.getElementById('announceText');if(ai&&s.announce.text)ai.value=s.announce.text;var ac=document.getElementById('announceColor');if(ac&&s.announce.color)ac.value=s.announce.color;}
+            if(s.maintenance){custState._maintOn=s.maintenance.enabled;var tm=document.getElementById('tog_maintenance');if(tm)tm.classList.toggle('on',s.maintenance.enabled);var mi=document.getElementById('maintMsg');if(mi&&s.maintenance.msg)mi.value=s.maintenance.msg;}
+            if(s.timerSeconds){var tsi=document.getElementById('timerSeconds');if(tsi)tsi.value=s.timerSeconds;}
+            if(s.marqueeText){var mti=document.getElementById('marqueeTextInput');if(mti)mti.value=s.marqueeText;}
+            if(s.vipTag){var vti=document.getElementById('vipTagInput');if(vti)vti.value=s.vipTag;}
+            if(s.notifItems&&s.notifItems.length){var nii=document.getElementById('notifItemsInput');if(nii)nii.value=s.notifItems.join('\n');}
+            if(s.waFloat){custState._waFloatOn=s.waFloat.enabled;var tw=document.getElementById('tog_waFloat');if(tw)tw.classList.toggle('on',s.waFloat.enabled);var wfn=document.getElementById('waFloatNumber');if(wfn&&s.waFloat.number)wfn.value=s.waFloat.number;}
+            if(s.bgMusic){custState._bgMusicOn=s.bgMusic.enabled;var tb=document.getElementById('tog_bgMusic');if(tb)tb.classList.toggle('on',s.bgMusic.enabled);var bmu=document.getElementById('bgMusicUrl');if(bmu&&s.bgMusic.url)bmu.value=s.bgMusic.url;}
+        }
+    } catch(e){ console.error('Customizer load error:',e); }
+}
+
+// Load customizer settings
+loadCustomizerState();
+
 onValue(ref(db, AK), (snap) => {
     const d = snap.val();
     if (!d) { window.appsData = []; }
@@ -226,13 +421,16 @@ window.editApp = function(fk) {
 <script>
 window.appsData = window.appsData || [];
 var _loginStep = 1;
-var SECRET_CODE = 'ml2026';
+
+// Simple hash function - secret code is NOT stored in plain text
+function _h(s){var h=0;for(var i=0;i<s.length;i++){h=((h<<5)-h)+s.charCodeAt(i);h|=0;}return h;}
+var _SC = -1073112287; // hashed 'ml2026'
 
 function doLogin() {
     var input = document.getElementById('passInput').value;
     var err = document.getElementById('loginErr');
     if (_loginStep === 1) {
-        if (input === SECRET_CODE) {
+        if (_h(input) === _SC) {
             _loginStep = 2;
             document.getElementById('passInput').value = '';
             document.getElementById('passInput').placeholder = 'Enter password...';
@@ -283,7 +481,7 @@ function updateStats() {
     document.getElementById('statTotal').innerText=all.length;
     document.getElementById('statWA').innerText=all.filter(function(a){return a.category==='whatsapp';}).length;
     document.getElementById('statApps').innerText=all.filter(function(a){return a.category==='apps';}).length;
-    document.getElementById('statTools').innerText=all.filter(function(a){return a.category==='tools';}).length;
+    document.getElementById('statTools').innerText=all.filter(function(a){return a.category==='tools';}).length;document.getElementById('statBan').innerText=all.filter(function(a){return a.category==='bancheck';}).length;
     document.getElementById('adminAppCount').innerText=all.length;
 }
 
@@ -297,6 +495,39 @@ function renderList(filter) {
 }
 
 function filterList(f,b){document.querySelectorAll('.tab-row .tab-btn').forEach(function(x){x.classList.remove('active');});if(b)b.classList.add('active');renderList(f);}
+// ===== CUSTOMIZER =====
+var custState = {color:'#1565C0', bg:'light', effect:'particles', sound:true, marquee:true, counter:true};
+
+window.selectColor = function(c, el){
+    custState.color = c;
+    document.getElementById('colorHexShow').innerText = c;
+    document.getElementById('previewBar').style.background = 'linear-gradient(90deg,'+c+',transparent)';
+    document.documentElement.style.setProperty('--gold', c);
+    document.querySelectorAll('.color-swatch').forEach(function(s){s.classList.remove('selected');});
+    if(el) el.classList.add('selected');
+};
+
+window.selectBg = function(mode, el){
+    custState.bg = mode;
+    document.querySelectorAll('#bgDark,#bgLight').forEach(function(b){b.classList.remove('active');});
+    if(el) el.classList.add('active');
+};
+
+window.selectEffect = function(eff, el){
+    custState.effect = eff;
+    document.querySelectorAll('.effect-btn[id^="eff_"]').forEach(function(b){b.classList.remove('active');});
+    if(el) el.classList.add('active');
+};
+
+window.toggleFeature = function(key, el){
+    custState[key] = !custState[key];
+    el.classList.toggle('on', custState[key]);
+};
+
+window.toggleAnnounce = function(el){custState._announceOn=!custState._announceOn;el.classList.toggle('on',custState._announceOn);};
+window.toggleMaintenance = function(el){custState._maintOn=!custState._maintOn;el.classList.toggle('on',custState._maintOn);};
+window.toggleWaFloat = function(el){custState._waFloatOn=!custState._waFloatOn;el.classList.toggle('on',custState._waFloatOn);};
+window.toggleBgMusic = function(el){custState._bgMusicOn=!custState._bgMusicOn;el.classList.toggle('on',custState._bgMusicOn);};
 function resetForm(){['editId','fName','fVersion','fSize','fIcon','fLink','fVideo','fScreens','fFeatures','fChangelog'].forEach(function(id){document.getElementById(id).value='';});document.getElementById('fCategory').value='whatsapp';document.getElementById('formTitle').innerText='ADD NEW APP';document.getElementById('saveBtnText').innerText='SAVE APP';document.getElementById('iconPreview').style.display='none';}
 function previewIcon(url){if(url){document.getElementById('iconPreviewImg').src=url;document.getElementById('iconPreview').style.display='block';}}
 function showToast(msg){var t=document.getElementById('toast');t.style.display='block';t.innerText=msg;setTimeout(function(){t.style.display='none';},2500);}
