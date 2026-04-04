@@ -80,7 +80,7 @@
         .toggle-switch.on{background:var(--gold);}
         .toggle-switch::after{content:'';position:absolute;width:22px;height:22px;background:#fff;border-radius:50%;top:3px;left:3px;transition:0.3s;}
         .toggle-switch.on::after{left:27px;}
-        .save-custom-btn{width:100%;padding:18px;border-radius:15px;border:none;background:linear-gradient(135deg,var(--gold),#ff8c00);color:#000;font-family:'Orbitron';font-weight:900;font-size:1rem;cursor:pointer;box-shadow:0 4px 20px rgba(255,215,0,0.4);margin-top:10px;letter-spacing:1px;}
+        .save-custom-btn{width:100%;padding:18px;border-radius:15px;border:none;background:linear-gradient(135deg,#00796b,#26a69a);color:#fff;font-family:'Orbitron';font-weight:900;font-size:1rem;cursor:pointer;box-shadow:0 4px 20px rgba(0,121,107,0.4);margin-top:10px;letter-spacing:1px;}
         .preview-bar{height:8px;border-radius:10px;margin:10px 0;background:linear-gradient(90deg,var(--gold),transparent);}
     </style>
 </head>
@@ -218,7 +218,7 @@
                 <div class="toggle-switch on" id="tog_sound" onclick="toggleFeature('sound',this)"></div>
             </div>
             <div class="toggle-row">
-                <span class="toggle-label"><i class="fas fa-marquee" style="color:var(--gold)"></i> Marquee Text</span>
+                <span class="toggle-label"><i class="fas fa-text-width" style="color:var(--gold)"></i> Marquee Text</span>
                 <div class="toggle-switch on" id="tog_marquee" onclick="toggleFeature('marquee',this)"></div>
             </div>
             <div class="toggle-row">
