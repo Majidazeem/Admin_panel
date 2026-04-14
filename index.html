@@ -3,29 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MA LEGEND | Admin</title>
-    <!-- No icon, no og tags - intentionally blank -->
+    <title>MA LEGEND | Admin Panel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Rajdhani:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root{--bg-color:#292d32;--text-main:#e0e5ec;--text-sub:#9baacf;--gold:#1565C0;--neon-green:#00ff88;--neon-blue:#00f3ff;--danger:#ff4757;--shadow-light:rgba(255,255,255,0.05);--shadow-dark:rgba(0,0,0,0.45);--shadow-flat:8px 8px 16px var(--shadow-dark),-8px -8px 16px var(--shadow-light);--shadow-pressed:inset 6px 6px 12px var(--shadow-dark),inset -6px -6px 12px var(--shadow-light);}
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
         body{background-color:var(--bg-color);color:var(--text-main);min-height:100vh;}
-
-        /* LOGIN PAGE */
         #loginPage{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg-color);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;}
         .login-box{background:var(--bg-color);border-radius:35px;width:100%;max-width:400px;padding:50px 35px;box-shadow:var(--shadow-flat);text-align:center;}
         .login-icon{font-size:3.5rem;color:var(--gold);margin-bottom:20px;}
         .login-title{font-family:'Orbitron';color:var(--gold);font-size:1.3rem;margin-bottom:8px;}
-        .login-sub{color:var(--text-sub);font-size:0.85rem;margin-bottom:30px;}
         .form-input{width:100%;background:var(--bg-color);border:none;color:var(--text-main);padding:16px 20px;border-radius:15px;font-size:1rem;outline:none;box-shadow:var(--shadow-pressed);font-family:'Poppins';margin-bottom:15px;}
         .form-input:focus{box-shadow:var(--shadow-pressed),0 0 0 2px var(--gold);}
         .btn-login{width:100%;padding:18px;border-radius:15px;border:none;font-weight:800;cursor:pointer;font-family:'Rajdhani';font-size:1.2rem;background:var(--bg-color);color:var(--gold);box-shadow:var(--shadow-flat);letter-spacing:2px;}
         .btn-login:active{box-shadow:var(--shadow-pressed);}
         .login-error{color:var(--danger);font-size:0.85rem;margin-top:10px;display:none;}
         .step-badge{display:inline-block;background:var(--bg-color);color:var(--neon-green);font-size:0.75rem;font-weight:800;letter-spacing:2px;padding:6px 16px;border-radius:20px;box-shadow:var(--shadow-pressed);margin-bottom:25px;}
-
-        /* ADMIN PANEL */
         #adminPage{display:none;}
         .admin-header{background:var(--bg-color);padding:20px 25px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 20px rgba(0,0,0,0.3);position:sticky;top:0;z-index:100;}
         .admin-body{max-width:900px;margin:0 auto;padding:30px 20px 100px;}
@@ -66,29 +60,21 @@
         select.form-input option{background:#292d32;}
         .icon-preview{margin-top:10px;display:none;}
         .icon-preview img{width:70px;height:70px;border-radius:15px;box-shadow:var(--shadow-flat);}
-        /* CUSTOMIZER */
-        .color-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:15px 0;}
-        .color-swatch{width:100%;aspect-ratio:1;border-radius:15px;cursor:pointer;border:3px solid transparent;transition:all 0.3s;box-shadow:var(--shadow-flat);}
-        .color-swatch.selected{border-color:#fff;transform:scale(1.1);box-shadow:0 0 15px currentColor;}
-        .effect-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:15px 0;}
-        .effect-btn{padding:15px;border-radius:15px;border:2px solid transparent;background:var(--bg-color);color:var(--text-main);cursor:pointer;font-family:'Rajdhani';font-weight:700;font-size:0.95rem;box-shadow:var(--shadow-flat);transition:all 0.3s;text-align:center;}
-        .effect-btn.active{border-color:var(--gold);color:var(--gold);box-shadow:var(--shadow-pressed);}
-        .effect-btn i{display:block;font-size:1.5rem;margin-bottom:6px;}
-        .toggle-row{display:flex;align-items:center;justify-content:space-between;padding:15px;background:var(--bg-color);border-radius:15px;box-shadow:var(--shadow-flat);margin-bottom:12px;}
-        .toggle-label{font-family:'Rajdhani';font-weight:700;font-size:1rem;display:flex;align-items:center;gap:10px;}
-        .toggle-switch{width:52px;height:28px;background:#555;border-radius:50px;position:relative;cursor:pointer;transition:0.3s;}
-        .toggle-switch.on{background:var(--gold);}
-        .toggle-switch::after{content:'';position:absolute;width:22px;height:22px;background:#fff;border-radius:50%;top:3px;left:3px;transition:0.3s;}
-        .toggle-switch.on::after{left:27px;}
-        .save-custom-btn{width:100%;padding:18px;border-radius:15px;border:none;background:linear-gradient(135deg,#00796b,#26a69a);color:#fff;font-family:'Orbitron';font-weight:900;font-size:1rem;cursor:pointer;box-shadow:0 4px 20px rgba(0,121,107,0.4);margin-top:10px;letter-spacing:1px;}
-        .preview-bar{height:8px;border-radius:10px;margin:10px 0;background:linear-gradient(90deg,var(--gold),transparent);}
+        /* Report tool items */
+        .tool-item{background:var(--bg-color);border-radius:18px;padding:16px;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow-pressed);margin-bottom:12px;}
+        .tool-item-icon{width:50px;height:50px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#fff;flex-shrink:0;box-shadow:var(--shadow-flat);}
+        .tool-item-info{flex:1;}
+        .tool-item-info h4{font-family:'Rajdhani';font-weight:800;font-size:1rem;margin-bottom:3px;}
+        .tool-item-info p{font-size:0.78rem;color:var(--text-sub);}
+        .tool-badge{font-size:0.7rem;font-weight:900;padding:4px 10px;border-radius:10px;display:inline-block;margin-top:5px;}
+        .badge-free-t{background:rgba(0,255,136,0.15);color:var(--neon-green);}
+        .badge-pro-t{background:rgba(21,101,192,0.2);color:var(--neon-blue);}
     </style>
 </head>
 <body>
-
 <div id="toast"></div>
 
-<!-- ===== LOGIN PAGE ===== -->
+<!-- LOGIN -->
 <div id="loginPage">
     <div class="login-box">
         <div class="login-icon"><i class="fas fa-shield-halved"></i></div>
@@ -100,7 +86,7 @@
     </div>
 </div>
 
-<!-- ===== ADMIN PANEL ===== -->
+<!-- ADMIN PAGE -->
 <div id="adminPage">
     <div class="admin-header">
         <div style="display:flex;align-items:center;gap:12px;">
@@ -109,20 +95,21 @@
                 <div style="font-size:0.7rem;color:var(--neon-green);display:flex;align-items:center;gap:5px;"><div class="pulsing-dot"></div> Firebase Connected</div>
             </div>
         </div>
-        <button class="btn-nav-icon" onclick="doLogout()" title="Logout"><i class="fas fa-right-from-bracket"></i></button>
+        <button class="btn-nav-icon" onclick="doLogout()"><i class="fas fa-right-from-bracket"></i></button>
     </div>
 
     <div class="admin-body">
         <!-- STATS -->
         <div class="admin-stats">
-            <div class="stat-box"><div class="num" id="statTotal">0</div><div class="lbl">Total</div></div>
+            <div class="stat-box"><div class="num" id="statTotal">0</div><div class="lbl">Total Apps</div></div>
             <div class="stat-box"><div class="num" id="statWA">0</div><div class="lbl">WA Mods</div></div>
             <div class="stat-box"><div class="num" id="statApps">0</div><div class="lbl">Apps</div></div>
             <div class="stat-box"><div class="num" id="statTools">0</div><div class="lbl">Tools</div></div>
             <div class="stat-box"><div class="num" id="statBan">0</div><div class="lbl">Ban Check</div></div>
+            <div class="stat-box"><div class="num" id="statReportTools">0</div><div class="lbl">Report Tools</div></div>
         </div>
 
-        <!-- ADD/EDIT FORM -->
+        <!-- ADD APP FORM -->
         <div class="admin-card">
             <h3><i class="fas fa-plus-circle"></i><span id="formTitle">ADD NEW APP</span></h3>
             <input type="hidden" id="editId">
@@ -137,7 +124,7 @@
                         <option value="apps">Apps</option>
                         <option value="tools">VIP Tools</option>
                         <option value="themes">XML Themes</option>
-                        <option value="bancheck">🛡️ Ban Check</option>
+                        <option value="bancheck">Ban Check</option>
                     </select>
                 </div>
                 <div class="form-group"><label>File Size</label><input type="text" id="fSize" class="form-input" placeholder="e.g. 74 MB or Online"></div>
@@ -149,12 +136,87 @@
             </div>
             <div class="form-group"><label>Download Link *</label><input type="url" id="fLink" class="form-input" placeholder="https://www.mediafire.com/..."></div>
             <div class="form-group"><label>YouTube Video ID (optional)</label><input type="text" id="fVideo" class="form-input" placeholder="e.g. dQw4w9WgXcQ"></div>
-            <div class="form-group"><label>Screenshots (one URL per line)</label><textarea id="fScreens" class="form-input" rows="3" placeholder="https://i.postimg.cc/..."></textarea></div>
+            <div class="form-group"><label>Screenshots (one URL per line)</label><textarea id="fScreens" class="form-input" rows="3"></textarea></div>
             <div class="form-group"><label>Features (one per line)</label><textarea id="fFeatures" class="form-input" rows="3" placeholder="Anti-Ban Logic&#10;Ghost Mode"></textarea></div>
             <div class="form-group"><label>Changelog (one per line)</label><textarea id="fChangelog" class="form-input" rows="3" placeholder="Fixed Anti-Ban&#10;New Dark Theme"></textarea></div>
-            <div style="display:flex;gap:15px;margin-top:10px;flex-wrap:wrap;">
-                <button class="btn-admin btn-gold" onclick="saveApp()" style="flex:1;min-width:140px;"><i class="fas fa-save"></i> <span id="saveBtnText">SAVE APP</span></button>
-                <button class="btn-admin btn-danger" onclick="resetForm()" style="flex:1;min-width:140px;"><i class="fas fa-times"></i> CANCEL</button>
+            <div style="display:flex;gap:15px;flex-wrap:wrap;">
+                <button class="btn-admin btn-gold" onclick="saveApp()" style="flex:1;"><i class="fas fa-save"></i> <span id="saveBtnText">SAVE APP</span></button>
+                <button class="btn-admin btn-danger" onclick="resetForm()" style="flex:1;"><i class="fas fa-times"></i> CANCEL</button>
+            </div>
+        </div>
+
+        <!-- ===== REPORT TEXTS MANAGER ===== -->
+        <div class="admin-card">
+            <h3><i class="fas fa-file-alt"></i> REPORT TEXTS MANAGER <span class="badge-count" id="reportTextsCount">0</span></h3>
+
+            <input type="hidden" id="rtxEditId">
+            <div class="form-row">
+                <div class="form-group"><label>Title *</label><input type="text" id="rtxTitle" class="form-input" placeholder="e.g. Channel Ban Request"></div>
+                <div class="form-group"><label>Type *</label>
+                    <select id="rtxType" class="form-input">
+                        <option value="free">FREE</option>
+                        <option value="pro">PRO</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Report Text * (jo user copy karega)</label>
+                <textarea id="rtxBody" class="form-input" rows="6" placeholder="Yahan report text likho jo user copy karega...&#10;&#10;Example:&#10;I am reporting this channel for spreading misinformation and harmful content. Please review and take immediate action."></textarea>
+            </div>
+            <div style="display:flex;gap:15px;flex-wrap:wrap;">
+                <button class="btn-admin btn-gold" onclick="saveReportText()" style="flex:1;"><i class="fas fa-save"></i> <span id="rtxSaveBtnText">SAVE TEXT</span></button>
+                <button class="btn-admin btn-danger" onclick="resetRtxForm()" style="flex:1;"><i class="fas fa-times"></i> CANCEL</button>
+            </div>
+
+            <div style="margin-top:25px;border-top:1px solid rgba(255,255,255,0.05);padding-top:20px;">
+                <div style="font-family:'Rajdhani';font-weight:700;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;font-size:0.9rem;">Saved Texts</div>
+                <div class="tab-row" id="rtxTabRow">
+                    <button class="tab-btn active" onclick="filterRtxList('all',this)">All</button>
+                    <button class="tab-btn" onclick="filterRtxList('free',this)">FREE</button>
+                    <button class="tab-btn" onclick="filterRtxList('pro',this)">PRO</button>
+                </div>
+                <div id="reportTextsList"><div class="empty-state">Koi text nahi hai abhi</div></div>
+            </div>
+        </div>
+
+        <!-- ===== REPORT TOOLS MANAGER ===== -->
+        <div class="admin-card">
+            <h3><i class="fas fa-chart-bar"></i> REPORT TOOLS MANAGER <span class="badge-count" id="reportToolsCount">0</span></h3>
+
+            <input type="hidden" id="rtEditId">
+            <div class="form-row">
+                <div class="form-group"><label>Tool Name *</label><input type="text" id="rtName" class="form-input" placeholder="e.g. Basic WA Report"></div>
+                <div class="form-group"><label>Type *</label>
+                    <select id="rtType" class="form-input">
+                        <option value="free">FREE</option>
+                        <option value="pro">PRO</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group"><label>Description</label><input type="text" id="rtDesc" class="form-input" placeholder="e.g. Simple WhatsApp account report"></div>
+            <div class="form-group"><label>Tool URL *</label><input type="url" id="rtUrl" class="form-input" placeholder="https://tool-url.vercel.app/"></div>
+            <div class="form-group"><label>Icon Style</label>
+                <select id="rtIconType" class="form-input">
+                    <option value="basic">🚩 Basic (Green)</option>
+                    <option value="mass">⚡ Mass (Red)</option>
+                    <option value="channel">📡 Channel (Purple)</option>
+                    <option value="spam">📧 Spam (Orange)</option>
+                    <option value="default">🔧 Default</option>
+                </select>
+            </div>
+            <div style="display:flex;gap:15px;flex-wrap:wrap;">
+                <button class="btn-admin btn-gold" onclick="saveReportTool()" style="flex:1;"><i class="fas fa-save"></i> <span id="rtSaveBtnText">SAVE TOOL</span></button>
+                <button class="btn-admin btn-danger" onclick="resetRtForm()" style="flex:1;"><i class="fas fa-times"></i> CANCEL</button>
+            </div>
+
+            <div style="margin-top:25px;border-top:1px solid rgba(255,255,255,0.05);padding-top:20px;">
+                <div style="font-family:'Rajdhani';font-weight:700;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;font-size:0.9rem;">Saved Tools</div>
+                <div class="tab-row">
+                    <button class="tab-btn active" onclick="filterRtList('all',this)">All</button>
+                    <button class="tab-btn" onclick="filterRtList('free',this)">FREE</button>
+                    <button class="tab-btn" onclick="filterRtList('pro',this)">PRO</button>
+                </div>
+                <div id="reportToolsList"><div class="empty-state">Koi tool nahi hai abhi</div></div>
             </div>
         </div>
 
@@ -168,131 +230,75 @@
             <button class="btn-admin btn-green" onclick="changePassword()"><i class="fas fa-lock"></i> UPDATE PASSWORD</button>
         </div>
 
-        <!-- WEBSITE CUSTOMIZER -->
+        <!-- ===== PRO KEYS MANAGER ===== -->
         <div class="admin-card">
-            <h3><i class="fas fa-palette"></i> WEBSITE CUSTOMIZER</h3>
-            <div class="preview-bar" id="previewBar"></div>
-
-            <!-- ACCENT COLOR -->
-            <label style="font-family:'Rajdhani';font-weight:700;font-size:0.9rem;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:block;">🎨 Accent Color</label>
-            <div class="color-grid">
-                <div class="color-swatch" style="background:#FFD700;" onclick="selectColor('#FFD700',this)" title="Gold"></div>
-                <div class="color-swatch" style="background:#00f3ff;" onclick="selectColor('#00f3ff',this)" title="Neon Blue"></div>
-                <div class="color-swatch" style="background:#00ff88;" onclick="selectColor('#00ff88',this)" title="Neon Green"></div>
-                <div class="color-swatch" style="background:#ff4757;" onclick="selectColor('#ff4757',this)" title="Red"></div>
-                <div class="color-swatch" style="background:#bd00ff;" onclick="selectColor('#bd00ff',this)" title="Purple"></div>
-                <div class="color-swatch" style="background:#ff6b35;" onclick="selectColor('#ff6b35',this)" title="Orange"></div>
-                <div class="color-swatch" style="background:#ff69b4;" onclick="selectColor('#ff69b4',this)" title="Pink"></div>
-                <div class="color-swatch" style="background:#00bcd4;" onclick="selectColor('#00bcd4',this)" title="Cyan"></div>
-                <div class="color-swatch" style="background:#76ff03;" onclick="selectColor('#76ff03',this)" title="Lime"></div>
-                <div class="color-swatch" style="background:#ffffff;" onclick="selectColor('#ffffff',this)" title="White"></div>
+            <h3><i class="fas fa-crown"></i> PRO KEYS MANAGER <span class="badge-count" id="proKeysCount">0</span></h3>
+            <input type="hidden" id="pkEditId">
+            <div class="form-row">
+                <div class="form-group"><label>Key *</label><input type="text" id="pkKey" class="form-input" placeholder="e.g. W-MALG-XXXX-XXXX-XXXX" style="text-transform:uppercase;"></div>
+                <div class="form-group"><label>Plan *</label>
+                    <select id="pkPlan" class="form-input">
+                        <option value="weekly">Weekly (7 Din)</option>
+                        <option value="monthly">Monthly (30 Din)</option>
+                    </select>
+                </div>
             </div>
-            <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
-                <label style="font-family:'Rajdhani';font-weight:700;font-size:0.85rem;color:var(--text-sub);">Custom Color:</label>
-                <input type="color" id="customColorPick" value="#1565C0" oninput="selectColor(this.value,null)" style="width:50px;height:40px;border:none;border-radius:10px;cursor:pointer;background:none;">
-                <span id="colorHexShow" style="font-family:'Orbitron';color:var(--gold);font-size:0.9rem;">#1565C0</span>
+            <div class="form-row">
+                <div class="form-group"><label>Expire Date *</label><input type="date" id="pkExpiry" class="form-input"></div>
+                <div class="form-group"><label>Note (optional)</label><input type="text" id="pkNote" class="form-input" placeholder="e.g. Customer name"></div>
             </div>
-
-            <!-- BACKGROUND STYLE -->
-            <label style="font-family:'Rajdhani';font-weight:700;font-size:0.9rem;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:block;">🌙 Background Mode</label>
-            <div style="display:flex;gap:12px;margin-bottom:20px;">
-                <div class="effect-btn" id="bgDark" onclick="selectBg('dark',this)" style="flex:1;"><i class="fas fa-moon"></i>Dark Mode</div>
-                <div class="effect-btn active" id="bgLight" onclick="selectBg('light',this)" style="flex:1;"><i class="fas fa-sun"></i>Light Mode</div>
+            <div style="display:flex;gap:15px;flex-wrap:wrap;margin-bottom:20px;">
+                <button class="btn-admin btn-gold" onclick="saveProKey()" style="flex:1;"><i class="fas fa-save"></i> <span id="pkSaveBtnText">GENERATE KEY</span></button>
+                <button class="btn-admin" onclick="generateRandomKey()" style="flex:1;background:var(--bg-color);color:var(--neon-blue);box-shadow:var(--shadow-flat);"><i class="fas fa-random"></i> AUTO GENERATE</button>
+                <button class="btn-admin btn-danger" onclick="resetPkForm()" style="flex:1;"><i class="fas fa-times"></i> CANCEL</button>
             </div>
-
-            <!-- PARTICLE EFFECTS -->
-            <label style="font-family:'Rajdhani';font-weight:700;font-size:0.9rem;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:block;">✨ Particle Effects</label>
-            <div class="effect-grid" style="grid-template-columns:repeat(3,1fr);">
-                <div class="effect-btn active" id="eff_particles" onclick="selectEffect('particles',this)"><i class="fas fa-circle"></i>Particles</div>
-                <div class="effect-btn" id="eff_stars" onclick="selectEffect('stars',this)"><i class="fas fa-star"></i>Stars</div>
-                <div class="effect-btn" id="eff_snow" onclick="selectEffect('snow',this)"><i class="fas fa-snowflake"></i>Snow</div>
-                <div class="effect-btn" id="eff_rain" onclick="selectEffect('rain',this)"><i class="fas fa-cloud-rain"></i>Rain</div>
-                <div class="effect-btn" id="eff_matrix" onclick="selectEffect('matrix',this)"><i class="fas fa-code"></i>Matrix</div>
-                <div class="effect-btn" id="eff_none" onclick="selectEffect('none',this)"><i class="fas fa-ban"></i>Off</div>
+            <!-- Keys List -->
+            <div style="border-top:1px solid rgba(255,255,255,0.05);padding-top:20px;">
+                <div style="font-family:'Rajdhani';font-weight:700;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;font-size:0.9rem;">All Keys</div>
+                <div class="tab-row" id="pkTabRow">
+                    <button class="tab-btn active" onclick="filterPkList('all',this)">All</button>
+                    <button class="tab-btn" onclick="filterPkList('active',this)">Active</button>
+                    <button class="tab-btn" onclick="filterPkList('used',this)">Used</button>
+                    <button class="tab-btn" onclick="filterPkList('revoked',this)">Revoked</button>
+                </div>
+                <div id="proKeysList"><div class="empty-state">Koi key nahi hai abhi</div></div>
             </div>
-
-            <!-- TOGGLES -->
-            <label style="font-family:'Rajdhani';font-weight:700;font-size:0.9rem;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin:15px 0 8px;display:block;">⚙️ Site Features</label>
-            <div class="toggle-row">
-                <span class="toggle-label"><i class="fas fa-music" style="color:var(--gold)"></i> Click Sound</span>
-                <div class="toggle-switch on" id="tog_sound" onclick="toggleFeature('sound',this)"></div>
-            </div>
-            <div class="toggle-row">
-                <span class="toggle-label"><i class="fas fa-text-width" style="color:var(--gold)"></i> Marquee Text</span>
-                <div class="toggle-switch on" id="tog_marquee" onclick="toggleFeature('marquee',this)"></div>
-            </div>
-            <div class="toggle-row">
-                <span class="toggle-label"><i class="fas fa-spinner" style="color:var(--gold)"></i> Loading Screen</span>
-                <div class="toggle-switch on" id="tog_loader" onclick="toggleFeature('loader',this)"></div>
-            </div>
-            <div class="toggle-row">
-                <span class="toggle-label"><i class="fas fa-globe" style="color:var(--gold)"></i> Live User Counter</span>
-                <div class="toggle-switch on" id="tog_counter" onclick="toggleFeature('counter',this)"></div>
-            </div>
-
-            <!-- ANNOUNCEMENT BANNER -->
-            <div style="margin-top:20px;border-top:1px solid rgba(255,255,255,0.05);padding-top:20px;">
-            <label style="font-family:'Rajdhani';font-weight:700;font-size:0.9rem;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:block;">📢 Announcement Banner</label>
-            <div class="toggle-row" style="margin-bottom:10px;"><span class="toggle-label"><i class="fas fa-bullhorn" style="color:var(--gold)"></i> Enable Banner</span><div class="toggle-switch" id="tog_announce" onclick="toggleAnnounce(this)"></div></div>
-            <input type="text" id="announceText" class="form-input" placeholder="Banner message text..." style="margin-bottom:8px;">
-            <select id="announceColor" class="form-input" style="margin-bottom:8px;">
-                <option value="linear-gradient(135deg,#1565C0,#0d47a1)">Blue (Default)</option>
-                <option value="linear-gradient(135deg,#FFD700,#ff8c00)">Gold</option>
-                <option value="linear-gradient(135deg,#ff4757,#c0392b)">Red Alert</option>
-                <option value="linear-gradient(135deg,#00ff88,#00b894)">Green</option>
-                <option value="linear-gradient(135deg,#bd00ff,#6c00b0)">Purple</option>
-            </select>
-            </div>
-
-            <!-- MAINTENANCE MODE -->
-            <div style="margin-top:20px;border-top:1px solid rgba(255,255,255,0.05);padding-top:20px;">
-            <label style="font-family:'Rajdhani';font-weight:700;font-size:0.9rem;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:block;">🔒 Maintenance Mode</label>
-            <div class="toggle-row" style="margin-bottom:10px;"><span class="toggle-label"><i class="fas fa-tools" style="color:var(--danger)"></i> Enable Maintenance</span><div class="toggle-switch" id="tog_maintenance" onclick="toggleMaintenance(this)"></div></div>
-            <input type="text" id="maintMsg" class="form-input" placeholder="Maintenance message for users...">
-            </div>
-
-            <!-- DOWNLOAD TIMER -->
-            <div style="margin-top:20px;border-top:1px solid rgba(255,255,255,0.05);padding-top:20px;">
-            <label style="font-family:'Rajdhani';font-weight:700;font-size:0.9rem;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:block;">⏳ Download Timer (seconds)</label>
-            <input type="number" id="timerSeconds" class="form-input" placeholder="Default: 10" min="3" max="60" value="10">
-            </div>
-
-            <!-- MARQUEE TEXT -->
-            <div style="margin-top:20px;border-top:1px solid rgba(255,255,255,0.05);padding-top:20px;">
-            <label style="font-family:'Rajdhani';font-weight:700;font-size:0.9rem;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:block;">📝 Marquee Text</label>
-            <input type="text" id="marqueeTextInput" class="form-input" placeholder="Enter marquee scrolling text...">
-            </div>
-
-            <!-- VIP TAG TEXT -->
-            <div style="margin-top:20px;border-top:1px solid rgba(255,255,255,0.05);padding-top:20px;">
-            <label style="font-family:'Rajdhani';font-weight:700;font-size:0.9rem;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:block;">⭐ VIP Tag Text</label>
-            <input type="text" id="vipTagInput" class="form-input" placeholder="e.g. VIP ELITE, PREMIUM, HOT">
-            </div>
-
-            <!-- NOTIFICATION TEXTS -->
-            <div style="margin-top:20px;border-top:1px solid rgba(255,255,255,0.05);padding-top:20px;">
-            <label style="font-family:'Rajdhani';font-weight:700;font-size:0.9rem;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:block;">🔔 Notification Alerts (one per line)</label>
-            <textarea id="notifItemsInput" class="form-input" rows="4" placeholder="WA Anti-Ban Updated!&#10;New iOS XML Added.&#10;System All Good." style="resize:vertical;"></textarea>
-            </div>
-
-            <!-- WHATSAPP FLOAT -->
-            <div style="margin-top:20px;border-top:1px solid rgba(255,255,255,0.05);padding-top:20px;">
-            <label style="font-family:'Rajdhani';font-weight:700;font-size:0.9rem;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:block;">💬 WhatsApp Float Button</label>
-            <div class="toggle-row" style="margin-bottom:10px;"><span class="toggle-label"><i class="fab fa-whatsapp" style="color:#25D366"></i> Show Float Button</span><div class="toggle-switch" id="tog_waFloat" onclick="toggleWaFloat(this)"></div></div>
-            <input type="text" id="waFloatNumber" class="form-input" placeholder="Phone with country code e.g. 923001234567">
-            </div>
-
-            <!-- BACKGROUND MUSIC -->
-            <div style="margin-top:20px;border-top:1px solid rgba(255,255,255,0.05);padding-top:20px;">
-            <label style="font-family:'Rajdhani';font-weight:700;font-size:0.9rem;color:var(--text-sub);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:block;">🎵 Background Music</label>
-            <div class="toggle-row" style="margin-bottom:10px;"><span class="toggle-label"><i class="fas fa-music" style="color:var(--gold)"></i> Enable Music</span><div class="toggle-switch" id="tog_bgMusic" onclick="toggleBgMusic(this)"></div></div>
-            <input type="text" id="bgMusicUrl" class="form-input" placeholder="Direct MP3 URL (e.g. from server/CDN)">
-            </div>
-
-            <button class="save-custom-btn" onclick="saveCustomizer()"><i class="fas fa-rocket"></i> APPLY TO WEBSITE</button>
         </div>
 
-        <!-- APPS LIST -->
+        <!-- ===== CONTACT SETTINGS ===== -->
+        <div class="admin-card">
+            <h3><i class="fas fa-address-book"></i> CONTACT SETTINGS</h3>
+            <p style="font-size:0.82rem;color:var(--text-sub);margin-bottom:20px;font-weight:600;">Reports section mein jo contact info show hoti hai woh yahan se change karo</p>
+            <div class="form-group">
+                <label>WhatsApp Number (country code ke saath)</label>
+                <input type="text" id="ctWaNumber" class="form-input" placeholder="e.g. 923277796795">
+            </div>
+            <div class="form-group">
+                <label>WhatsApp Display Text</label>
+                <input type="text" id="ctWaText" class="form-input" placeholder="e.g. +923277796795 • Fast Response">
+            </div>
+            <div class="form-group">
+                <label>Telegram Username</label>
+                <input type="text" id="ctTgUsername" class="form-input" placeholder="e.g. Top_3x_Legend (@ ke baghair)">
+            </div>
+            <div class="form-group">
+                <label>Telegram Display Text</label>
+                <input type="text" id="ctTgText" class="form-input" placeholder="e.g. @Top_3x_Legend • 24/7 Available">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Weekly Price</label>
+                    <input type="text" id="ctWeeklyPrice" class="form-input" placeholder="e.g. 200 PKR (7 Din)">
+                </div>
+                <div class="form-group">
+                    <label>Monthly Price</label>
+                    <input type="text" id="ctMonthlyPrice" class="form-input" placeholder="e.g. 500 PKR (30 Din)">
+                </div>
+            </div>
+            <button class="btn-admin btn-gold" onclick="saveContactSettings()" style="width:100%;"><i class="fas fa-save"></i> SAVE CONTACT SETTINGS</button>
+        </div>
+
+        <!-- MANAGE APPS LIST -->
         <div class="admin-card">
             <h3><i class="fas fa-list"></i> MANAGE APPS <span class="badge-count" id="adminAppCount">0</span></h3>
             <div class="tab-row">
@@ -301,7 +307,7 @@
                 <button class="tab-btn" onclick="filterList('apps',this)">Apps</button>
                 <button class="tab-btn" onclick="filterList('tools',this)">Tools</button>
                 <button class="tab-btn" onclick="filterList('themes',this)">Themes</button>
-                <button class="tab-btn" onclick="filterList('bancheck',this)">🛡️ Ban Check</button>
+                <button class="tab-btn" onclick="filterList('bancheck',this)">Ban Check</button>
             </div>
             <div id="appsList" class="apps-list-admin"></div>
         </div>
@@ -316,62 +322,12 @@ import { getDatabase, ref, set, get, remove, onValue, push } from "https://www.g
 const app = initializeApp({ databaseURL: "https://my-store-a63af-default-rtdb.firebaseio.com/" });
 const db = getDatabase(app);
 const AK = "apps";
+const RT = "reportTools";
 
 window.appsData = [];
+window.reportToolsData = [];
 
 // Load apps
-// ===== CUSTOMIZER FIREBASE FUNCTIONS (need module scope) =====
-window.saveCustomizer = async function(){
-    try{
-        // collect new fields into custState
-        var at=document.getElementById('announceText'); if(at) custState.announce={enabled:custState._announceOn||false,text:at.value||'',color:document.getElementById('announceColor').value};
-        var mm=document.getElementById('maintMsg'); if(mm) custState.maintenance={enabled:custState._maintOn||false,msg:mm.value||'Site is under maintenance.'};
-        var ts=document.getElementById('timerSeconds'); if(ts&&ts.value) custState.timerSeconds=parseInt(ts.value)||10;
-        var mti=document.getElementById('marqueeTextInput'); if(mti&&mti.value) custState.marqueeText=mti.value;
-        var vti=document.getElementById('vipTagInput'); if(vti&&vti.value) custState.vipTag=vti.value;
-        var nii=document.getElementById('notifItemsInput'); if(nii&&nii.value) custState.notifItems=nii.value.split('\n').filter(function(x){return x.trim();});
-        var wfn=document.getElementById('waFloatNumber'); custState.waFloat={enabled:custState._waFloatOn||false,number:wfn?wfn.value:''};
-        var bmu=document.getElementById('bgMusicUrl'); custState.bgMusic={enabled:custState._bgMusicOn||false,url:bmu?bmu.value:''};
-        await set(ref(db,'siteSettings'), custState);
-        showToast('🚀 Applied! Refresh your website to see changes.');
-    } catch(e){showToast('❌ Firebase Error: '+e.message);}
-};
-
-async function loadCustomizerState(){
-    try{
-        const snap = await get(ref(db,'siteSettings'));
-        if(snap.exists()){
-            const s = snap.val();
-            custState = {...custState, ...s};
-            if(s.color){
-                window.selectColor(s.color, null);
-                document.getElementById('customColorPick').value = s.color;
-            }
-            if(s.bg) window.selectBg(s.bg, document.getElementById('bg'+s.bg.charAt(0).toUpperCase()+s.bg.slice(1)));
-            if(s.effect) window.selectEffect(s.effect, document.getElementById('eff_'+s.effect));
-            ['sound','marquee','loader','counter'].forEach(function(k){
-                if(s[k]!==undefined){
-                    custState[k]=s[k];
-                    var el=document.getElementById('tog_'+k);
-                    if(el) el.classList.toggle('on',s[k]);
-                }
-            });
-            // Load new fields
-            if(s.announce){custState._announceOn=s.announce.enabled;var te=document.getElementById('tog_announce');if(te)te.classList.toggle('on',s.announce.enabled);var ai=document.getElementById('announceText');if(ai&&s.announce.text)ai.value=s.announce.text;var ac=document.getElementById('announceColor');if(ac&&s.announce.color)ac.value=s.announce.color;}
-            if(s.maintenance){custState._maintOn=s.maintenance.enabled;var tm=document.getElementById('tog_maintenance');if(tm)tm.classList.toggle('on',s.maintenance.enabled);var mi=document.getElementById('maintMsg');if(mi&&s.maintenance.msg)mi.value=s.maintenance.msg;}
-            if(s.timerSeconds){var tsi=document.getElementById('timerSeconds');if(tsi)tsi.value=s.timerSeconds;}
-            if(s.marqueeText){var mti=document.getElementById('marqueeTextInput');if(mti)mti.value=s.marqueeText;}
-            if(s.vipTag){var vti=document.getElementById('vipTagInput');if(vti)vti.value=s.vipTag;}
-            if(s.notifItems&&s.notifItems.length){var nii=document.getElementById('notifItemsInput');if(nii)nii.value=s.notifItems.join('\n');}
-            if(s.waFloat){custState._waFloatOn=s.waFloat.enabled;var tw=document.getElementById('tog_waFloat');if(tw)tw.classList.toggle('on',s.waFloat.enabled);var wfn=document.getElementById('waFloatNumber');if(wfn&&s.waFloat.number)wfn.value=s.waFloat.number;}
-            if(s.bgMusic){custState._bgMusicOn=s.bgMusic.enabled;var tb=document.getElementById('tog_bgMusic');if(tb)tb.classList.toggle('on',s.bgMusic.enabled);var bmu=document.getElementById('bgMusicUrl');if(bmu&&s.bgMusic.url)bmu.value=s.bgMusic.url;}
-        }
-    } catch(e){ console.error('Customizer load error:',e); }
-}
-
-// Load customizer settings
-loadCustomizerState();
-
 onValue(ref(db, AK), (snap) => {
     const d = snap.val();
     if (!d) { window.appsData = []; }
@@ -381,15 +337,24 @@ onValue(ref(db, AK), (snap) => {
     renderList('all');
 });
 
+// Load report tools
+onValue(ref(db, RT), (snap) => {
+    const d = snap.val();
+    if (!d) { window.reportToolsData = []; }
+    else { window.reportToolsData = Object.keys(d).map(k => ({firebaseKey:k,...d[k]})); }
+    updateReportStats();
+    renderRtList('all');
+});
+
 window.saveApp = async function() {
-    const name=document.getElementById('fName').value.trim(), version=document.getElementById('fVersion').value.trim(), category=document.getElementById('fCategory').value, size=document.getElementById('fSize').value.trim()||'N/A', icon=document.getElementById('fIcon').value.trim(), link=document.getElementById('fLink').value.trim(), video=document.getElementById('fVideo').value.trim(), screens=document.getElementById('fScreens').value.trim().split('\n').filter(s=>s.trim()), features=document.getElementById('fFeatures').value.trim().split('\n').filter(f=>f.trim()), changelog=document.getElementById('fChangelog').value.trim().split('\n').filter(c=>c.trim()), editId=document.getElementById('editId').value;
+    const name=document.getElementById('fName').value.trim(),version=document.getElementById('fVersion').value.trim(),category=document.getElementById('fCategory').value,size=document.getElementById('fSize').value.trim()||'N/A',icon=document.getElementById('fIcon').value.trim(),link=document.getElementById('fLink').value.trim(),video=document.getElementById('fVideo').value.trim(),screens=document.getElementById('fScreens').value.trim().split('\n').filter(s=>s.trim()),features=document.getElementById('fFeatures').value.trim().split('\n').filter(f=>f.trim()),changelog=document.getElementById('fChangelog').value.trim().split('\n').filter(c=>c.trim()),editId=document.getElementById('editId').value;
     if(!name||!version||!icon||!link){showToast('⚠️ Fill required fields!');return;}
     const appData={id:Date.now(),name,version,category,size,icon,link,video,screens:screens.length?screens:[icon],features:features.length?features:['Premium Features'],changelog:changelog.length?changelog:['Latest Update'],uploadDate:new Date().toISOString()};
-    try {
+    try{
         if(editId){await set(ref(db,`${AK}/${editId}`),appData);showToast('✅ App Updated!');}
         else{const nr=push(ref(db,AK));await set(nr,appData);showToast('✅ App Added!');}
         resetForm();
-    } catch(e){showToast('❌ Firebase Error!');}
+    }catch(e){showToast('❌ Firebase Error: '+e.message);}
 };
 
 window.deleteApp = async function(fk, nm) {
@@ -399,7 +364,7 @@ window.deleteApp = async function(fk, nm) {
 };
 
 window.editApp = function(fk) {
-    const a=window.appsData.find(x=>x.firebaseKey===fk); if(!a)return;
+    const a=window.appsData.find(x=>x.firebaseKey===fk);if(!a)return;
     document.getElementById('editId').value=fk;
     document.getElementById('fName').value=a.name||'';
     document.getElementById('fVersion').value=a.version||'';
@@ -416,57 +381,226 @@ window.editApp = function(fk) {
     if(a.icon){document.getElementById('iconPreviewImg').src=a.icon;document.getElementById('iconPreview').style.display='block';}
     document.querySelector('.admin-card').scrollIntoView({behavior:'smooth'});
 };
+
+// ===== REPORT TOOLS CRUD =====
+window.saveReportTool = async function() {
+    const name = document.getElementById('rtName').value.trim();
+    const type = document.getElementById('rtType').value;
+    const desc = document.getElementById('rtDesc').value.trim();
+    const url  = document.getElementById('rtUrl').value.trim();
+    const toolType = document.getElementById('rtIconType').value;
+    const editId = document.getElementById('rtEditId').value;
+    if(!name||!url){showToast('⚠️ Name aur URL zaroori hai!');return;}
+    const toolData = {name, type, description:desc, url, toolType, addedAt:new Date().toISOString()};
+    try{
+        if(editId){
+            await set(ref(db,`${RT}/${editId}`),toolData);
+            showToast('✅ Tool Update Ho Gaya!');
+        }else{
+            const nr=push(ref(db,RT));
+            await set(nr,toolData);
+            showToast('✅ Tool Add Ho Gaya!');
+        }
+        resetRtForm();
+    }catch(e){showToast('❌ Firebase Error: '+e.message);}
+};
+
+window.deleteReportTool = async function(fk, nm) {
+    if(!confirm('Delete "'+nm+'"?'))return;
+    try{await remove(ref(db,`${RT}/${fk}`));showToast('🗑️ Tool Delete Ho Gaya!');}
+    catch(e){showToast('❌ Error!');}
+};
+
+window.editReportTool = function(fk) {
+    const t = window.reportToolsData.find(x=>x.firebaseKey===fk);
+    if(!t)return;
+    document.getElementById('rtEditId').value=fk;
+    document.getElementById('rtName').value=t.name||'';
+    document.getElementById('rtType').value=t.type||'free';
+    document.getElementById('rtDesc').value=t.description||'';
+    document.getElementById('rtUrl').value=t.url||'';
+    document.getElementById('rtIconType').value=t.toolType||'default';
+    document.getElementById('rtSaveBtnText').innerText='UPDATE TOOL';
+    document.getElementById('reportToolsList').closest('.admin-card').scrollIntoView({behavior:'smooth'});
+};
+
+// ===== PRO KEYS FIREBASE =====
+const PK = "proKeys";
+window.proKeysData = [];
+
+onValue(ref(db, PK), (snap) => {
+    const d = snap.val();
+    if(!d){ window.proKeysData=[]; }
+    else{ window.proKeysData=Object.keys(d).map(k=>({firebaseKey:k,...d[k]})); }
+    const el=document.getElementById('proKeysCount');
+    if(el)el.innerText=window.proKeysData.length;
+    renderPkList('all');
+});
+
+window.saveProKey = async function(){
+    const key = document.getElementById('pkKey').value.trim().toUpperCase();
+    const plan = document.getElementById('pkPlan').value;
+    const expiry = document.getElementById('pkExpiry').value;
+    const note = document.getElementById('pkNote').value.trim();
+    const editId = document.getElementById('pkEditId').value;
+    if(!key||!expiry){showToast('⚠️ Key aur Expiry zaroori hai!');return;}
+    const expiresAt = new Date(expiry);
+    expiresAt.setHours(23,59,59,999);
+    const pkData = {key, plan, expiresAt:expiresAt.toISOString(), note, status:'active', addedAt:new Date().toISOString()};
+    try{
+        if(editId){await set(ref(db,`${PK}/${editId}`),pkData);showToast('✅ Key Update Ho Gayi!');}
+        else{const nr=push(ref(db,PK));await set(nr,pkData);showToast('✅ Key Generate Ho Gayi!');}
+        resetPkForm();
+    }catch(e){showToast('❌ Firebase Error: '+e.message);}
+};
+
+window.revokeProKey = async function(fk){
+    if(!confirm('Yeh key revoke karo?'))return;
+    try{await set(ref(db,`${PK}/${fk}/status`),'revoked');showToast('🚫 Key Revoke Ho Gayi!');}
+    catch(e){showToast('❌ Error!');}
+};
+
+window.deleteProKey = async function(fk){
+    if(!confirm('Key permanently delete karo?'))return;
+    try{await remove(ref(db,`${PK}/${fk}`));showToast('🗑️ Key Delete Ho Gayi!');}
+    catch(e){showToast('❌ Error!');}
+};
+
+window.editProKey = function(fk){
+    const k=window.proKeysData.find(x=>x.firebaseKey===fk);
+    if(!k)return;
+    document.getElementById('pkEditId').value=fk;
+    document.getElementById('pkKey').value=k.key||'';
+    document.getElementById('pkPlan').value=k.plan||'weekly';
+    document.getElementById('pkExpiry').value=k.expiresAt?k.expiresAt.split('T')[0]:'';
+    document.getElementById('pkNote').value=k.note||'';
+    document.getElementById('pkSaveBtnText').innerText='UPDATE KEY';
+    document.getElementById('proKeysList').closest('.admin-card').scrollIntoView({behavior:'smooth'});
+};
+
+// ===== CONTACT SETTINGS FIREBASE =====
+async function loadContactSettings(){
+    try{
+        const snap=await get(ref(db,'contactSettings'));
+        if(!snap.exists())return;
+        const s=snap.val();
+        if(s.waNumber) document.getElementById('ctWaNumber').value=s.waNumber;
+        if(s.waText) document.getElementById('ctWaText').value=s.waText;
+        if(s.tgUsername) document.getElementById('ctTgUsername').value=s.tgUsername;
+        if(s.tgText) document.getElementById('ctTgText').value=s.tgText;
+        if(s.weeklyPrice) document.getElementById('ctWeeklyPrice').value=s.weeklyPrice;
+        if(s.monthlyPrice) document.getElementById('ctMonthlyPrice').value=s.monthlyPrice;
+    }catch(e){}
+}
+loadContactSettings();
+
+window.saveContactSettings = async function(){
+    const data = {
+        waNumber: document.getElementById('ctWaNumber').value.trim(),
+        waText:   document.getElementById('ctWaText').value.trim(),
+        tgUsername: document.getElementById('ctTgUsername').value.trim().replace('@',''),
+        tgText:   document.getElementById('ctTgText').value.trim(),
+        weeklyPrice: document.getElementById('ctWeeklyPrice').value.trim(),
+        monthlyPrice: document.getElementById('ctMonthlyPrice').value.trim(),
+    };
+    if(!data.waNumber||!data.tgUsername){showToast('⚠️ WA Number aur TG Username zaroori hai!');return;}
+    try{
+        await set(ref(db,'contactSettings'), data);
+        showToast('✅ Contact Settings Save Ho Gayi!');
+    }catch(e){showToast('❌ Firebase Error: '+e.message);}
+};
+
+// ===== REPORT TEXTS FIREBASE =====
+const RX = "reportTexts";
+window.reportTextsData = [];
+
+onValue(ref(db, RX), (snap) => {
+    const d = snap.val();
+    if(!d){ window.reportTextsData=[]; }
+    else{ window.reportTextsData=Object.keys(d).map(k=>({firebaseKey:k,...d[k]})); }
+    updateReportTextsStats();
+    renderRtxList('all');
+});
+
+window.saveReportText = async function(){
+    const title = document.getElementById('rtxTitle').value.trim();
+    const type  = document.getElementById('rtxType').value;
+    const body  = document.getElementById('rtxBody').value.trim();
+    const editId= document.getElementById('rtxEditId').value;
+    if(!title||!body){showToast('⚠️ Title aur Text zaroori hai!');return;}
+    const txData = {title, type, body, addedAt:new Date().toISOString()};
+    try{
+        if(editId){
+            await set(ref(db,`${RX}/${editId}`),txData);
+            showToast('✅ Text Update Ho Gaya!');
+        }else{
+            const nr=push(ref(db,RX));
+            await set(nr,txData);
+            showToast('✅ Text Add Ho Gaya!');
+        }
+        resetRtxForm();
+    }catch(e){showToast('❌ Firebase Error: '+e.message);}
+};
+
+window.deleteReportText = async function(fk, title){
+    if(!confirm('Delete "'+title+'"?'))return;
+    try{await remove(ref(db,`${RX}/${fk}`));showToast('🗑️ Text Delete Ho Gaya!');}
+    catch(e){showToast('❌ Error!');}
+};
+
+window.editReportText = function(fk){
+    const t=window.reportTextsData.find(x=>x.firebaseKey===fk);
+    if(!t)return;
+    document.getElementById('rtxEditId').value=fk;
+    document.getElementById('rtxTitle').value=t.title||'';
+    document.getElementById('rtxType').value=t.type||'free';
+    document.getElementById('rtxBody').value=t.body||'';
+    document.getElementById('rtxSaveBtnText').innerText='UPDATE TEXT';
+    document.getElementById('reportTextsList').closest('.admin-card').scrollIntoView({behavior:'smooth'});
+};
 </script>
 
 <script>
 window.appsData = window.appsData || [];
+window.reportToolsData = window.reportToolsData || [];
 var _loginStep = 1;
 
-// Simple hash function - secret code is NOT stored in plain text
 function _h(s){var h=0;for(var i=0;i<s.length;i++){h=((h<<5)-h)+s.charCodeAt(i);h|=0;}return h;}
-var _SC = -1073112287; // hashed 'ml2026'
+var _SC = -1073112287; // 'ml2026'
 
-function doLogin() {
-    var input = document.getElementById('passInput').value;
-    var err = document.getElementById('loginErr');
-    if (_loginStep === 1) {
-        if (_h(input) === _SC) {
-            _loginStep = 2;
-            document.getElementById('passInput').value = '';
-            document.getElementById('passInput').placeholder = 'Enter password...';
-            document.getElementById('stepBadge').innerText = 'STEP 2 — PASSWORD';
-            err.style.display = 'none';
-        } else {
-            err.innerText = '❌ Wrong secret code!';
-            err.style.display = 'block';
-            document.getElementById('passInput').value = '';
-        }
-    } else {
-        var stored = localStorage.getItem('ma_admin_pass') || 'malegend123';
-        if (input === stored) {
-            document.getElementById('loginPage').style.display = 'none';
-            document.getElementById('adminPage').style.display = 'block';
-            err.style.display = 'none';
-        } else {
-            err.innerText = '❌ Wrong password!';
-            err.style.display = 'block';
-            document.getElementById('passInput').value = '';
-        }
+function doLogin(){
+    var input=document.getElementById('passInput').value;
+    var err=document.getElementById('loginErr');
+    if(_loginStep===1){
+        if(_h(input)===_SC){
+            _loginStep=2;
+            document.getElementById('passInput').value='';
+            document.getElementById('passInput').placeholder='Enter password...';
+            document.getElementById('stepBadge').innerText='STEP 2 — PASSWORD';
+            err.style.display='none';
+        }else{err.innerText='❌ Wrong secret code!';err.style.display='block';document.getElementById('passInput').value='';}
+    }else{
+        var stored=localStorage.getItem('ma_admin_pass')||'malegend123';
+        if(input===stored){
+            document.getElementById('loginPage').style.display='none';
+            document.getElementById('adminPage').style.display='block';
+            err.style.display='none';
+        }else{err.innerText='❌ Wrong password!';err.style.display='block';document.getElementById('passInput').value='';}
     }
 }
 
-function doLogout() {
-    _loginStep = 1;
-    document.getElementById('passInput').value = '';
-    document.getElementById('passInput').placeholder = 'Enter secret code...';
-    document.getElementById('stepBadge').innerText = 'STEP 1 — SECRET CODE';
-    document.getElementById('loginPage').style.display = 'flex';
-    document.getElementById('adminPage').style.display = 'none';
-    document.getElementById('loginErr').style.display = 'none';
+function doLogout(){
+    _loginStep=1;
+    document.getElementById('passInput').value='';
+    document.getElementById('passInput').placeholder='Enter secret code...';
+    document.getElementById('stepBadge').innerText='STEP 1 — SECRET CODE';
+    document.getElementById('loginPage').style.display='flex';
+    document.getElementById('adminPage').style.display='none';
+    document.getElementById('loginErr').style.display='none';
 }
 
-function changePassword() {
-    var cur=document.getElementById('curPass').value, newp=document.getElementById('newPass').value, stored=localStorage.getItem('ma_admin_pass')||'malegend123';
+function changePassword(){
+    var cur=document.getElementById('curPass').value,newp=document.getElementById('newPass').value,stored=localStorage.getItem('ma_admin_pass')||'malegend123';
     if(!cur||!newp){showToast('⚠️ Fill both fields!');return;}
     if(cur!==stored){showToast('❌ Wrong current password!');return;}
     if(newp.length<6){showToast('⚠️ Min 6 characters!');return;}
@@ -476,16 +610,40 @@ function changePassword() {
     document.getElementById('newPass').value='';
 }
 
-function updateStats() {
+function updateStats(){
     var all=window.appsData;
     document.getElementById('statTotal').innerText=all.length;
     document.getElementById('statWA').innerText=all.filter(function(a){return a.category==='whatsapp';}).length;
     document.getElementById('statApps').innerText=all.filter(function(a){return a.category==='apps';}).length;
-    document.getElementById('statTools').innerText=all.filter(function(a){return a.category==='tools';}).length;document.getElementById('statBan').innerText=all.filter(function(a){return a.category==='bancheck';}).length;
+    document.getElementById('statTools').innerText=all.filter(function(a){return a.category==='tools';}).length;
+    document.getElementById('statBan').innerText=all.filter(function(a){return a.category==='bancheck';}).length;
     document.getElementById('adminAppCount').innerText=all.length;
 }
 
-function renderList(filter) {
+function updateReportStats(){
+    var rt=window.reportToolsData;
+    document.getElementById('statReportTools').innerText=rt.length;
+    document.getElementById('reportToolsCount').innerText=rt.length;
+}
+
+function updateReportTextsStats(){
+    var rx=window.reportTextsData||[];
+    var el=document.getElementById('reportTextsCount');
+    if(el)el.innerText=rx.length;
+}
+
+var _iconBg = {
+    'basic':'linear-gradient(135deg,#00796b,#26a69a)',
+    'mass':'linear-gradient(135deg,#e74c3c,#c0392b)',
+    'channel':'linear-gradient(135deg,#9b59b6,#6c3483)',
+    'spam':'linear-gradient(135deg,#e67e22,#d35400)',
+    'default':'linear-gradient(135deg,#00796b,#26a69a)'
+};
+var _iconClass = {
+    'basic':'fa-flag','mass':'fa-bolt','channel':'fa-satellite-dish','spam':'fa-envelope','default':'fa-tools'
+};
+
+function renderList(filter){
     var list=document.getElementById('appsList');
     var data=filter==='all'?window.appsData:window.appsData.filter(function(a){return a.category===filter;});
     if(!data.length){list.innerHTML='<div class="empty-state"><p>No apps found</p></div>';return;}
@@ -494,41 +652,100 @@ function renderList(filter) {
     }).join('');
 }
 
+function renderRtList(filter){
+    var list=document.getElementById('reportToolsList');
+    var data=filter==='all'?window.reportToolsData:window.reportToolsData.filter(function(t){return t.type===filter;});
+    if(!data.length){list.innerHTML='<div class="empty-state">Koi tool nahi hai</div>';return;}
+    list.innerHTML=data.map(function(t){
+        var bg=_iconBg[t.toolType]||_iconBg['default'];
+        var ic=_iconClass[t.toolType]||_iconClass['default'];
+        var badgeCls=t.type==='free'?'badge-free-t':'badge-pro-t';
+        var badgeLbl=t.type==='free'?'🔓 FREE':'🔐 PRO';
+        return '<div class="tool-item">'
+            +'<div class="tool-item-icon" style="background:'+bg+'"><i class="fas '+ic+'"></i></div>'
+            +'<div class="tool-item-info"><h4>'+t.name+'</h4><p>'+(t.description||'')+'</p>'
+            +'<span class="tool-badge '+badgeCls+'">'+badgeLbl+'</span></div>'
+            +'<div class="app-actions">'
+            +'<button class="btn-icon btn-edit" onclick="editReportTool(\''+t.firebaseKey+'\')"><i class="fas fa-pen"></i></button>'
+            +'<button class="btn-icon btn-del" onclick="deleteReportTool(\''+t.firebaseKey+'\',\''+t.name.replace(/'/g,"\\'")+'\')"><i class="fas fa-trash"></i></button>'
+            +'</div></div>';
+    }).join('');
+}
+
 function filterList(f,b){document.querySelectorAll('.tab-row .tab-btn').forEach(function(x){x.classList.remove('active');});if(b)b.classList.add('active');renderList(f);}
-// ===== CUSTOMIZER =====
-var custState = {color:'#1565C0', bg:'light', effect:'particles', sound:true, marquee:true, counter:true};
-
-window.selectColor = function(c, el){
-    custState.color = c;
-    document.getElementById('colorHexShow').innerText = c;
-    document.getElementById('previewBar').style.background = 'linear-gradient(90deg,'+c+',transparent)';
-    document.documentElement.style.setProperty('--gold', c);
-    document.querySelectorAll('.color-swatch').forEach(function(s){s.classList.remove('selected');});
-    if(el) el.classList.add('selected');
-};
-
-window.selectBg = function(mode, el){
-    custState.bg = mode;
-    document.querySelectorAll('#bgDark,#bgLight').forEach(function(b){b.classList.remove('active');});
-    if(el) el.classList.add('active');
-};
-
-window.selectEffect = function(eff, el){
-    custState.effect = eff;
-    document.querySelectorAll('.effect-btn[id^="eff_"]').forEach(function(b){b.classList.remove('active');});
-    if(el) el.classList.add('active');
-};
-
-window.toggleFeature = function(key, el){
-    custState[key] = !custState[key];
-    el.classList.toggle('on', custState[key]);
-};
-
-window.toggleAnnounce = function(el){custState._announceOn=!custState._announceOn;el.classList.toggle('on',custState._announceOn);};
-window.toggleMaintenance = function(el){custState._maintOn=!custState._maintOn;el.classList.toggle('on',custState._maintOn);};
-window.toggleWaFloat = function(el){custState._waFloatOn=!custState._waFloatOn;el.classList.toggle('on',custState._waFloatOn);};
-window.toggleBgMusic = function(el){custState._bgMusicOn=!custState._bgMusicOn;el.classList.toggle('on',custState._bgMusicOn);};
+function filterRtList(f,b){document.querySelectorAll('#reportToolsList').length;document.querySelectorAll('.tab-row .tab-btn').forEach(function(x){x.classList.remove('active');});if(b)b.classList.add('active');renderRtList(f);}
+function filterRtxList(f,b){
+    document.querySelectorAll('#rtxTabRow .tab-btn').forEach(function(x){x.classList.remove('active');});
+    if(b)b.classList.add('active');
+    renderRtxList(f);
+}
+function renderRtxList(filter){
+    var list=document.getElementById('reportTextsList');
+    var data=filter==='all'?window.reportTextsData:(window.reportTextsData||[]).filter(function(t){return t.type===filter;});
+    if(!data||!data.length){list.innerHTML='<div class="empty-state">Koi text nahi hai</div>';return;}
+    list.innerHTML=data.map(function(t){
+        var badgeCls=t.type==='free'?'badge-free-t':'badge-pro-t';
+        var badgeLbl=t.type==='free'?'🔓 FREE':'🔐 PRO';
+        var preview=(t.body||'').substring(0,80)+(t.body&&t.body.length>80?'...':'');
+        return '<div class="tool-item">'
+            +'<div class="tool-item-icon" style="background:linear-gradient(135deg,#00796b,#26a69a);"><i class="fas fa-file-alt"></i></div>'
+            +'<div class="tool-item-info"><h4>'+escA(t.title)+'</h4>'
+            +'<p style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:160px;">'+escA(preview)+'</p>'
+            +'<span class="tool-badge '+badgeCls+'">'+badgeLbl+'</span></div>'
+            +'<div class="app-actions">'
+            +'<button class="btn-icon btn-edit" onclick="editReportText(\''+t.firebaseKey+'\')"><i class="fas fa-pen"></i></button>'
+            +'<button class="btn-icon btn-del" onclick="deleteReportText(\''+t.firebaseKey+'\',\''+t.title.replace(/'/g,"\\'")+'\')"><i class="fas fa-trash"></i></button>'
+            +'</div></div>';
+    }).join('');
+}
+function escA(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function resetRtxForm(){['rtxEditId','rtxTitle','rtxBody'].forEach(function(id){document.getElementById(id).value='';});document.getElementById('rtxType').value='free';document.getElementById('rtxSaveBtnText').innerText='SAVE TEXT';}
 function resetForm(){['editId','fName','fVersion','fSize','fIcon','fLink','fVideo','fScreens','fFeatures','fChangelog'].forEach(function(id){document.getElementById(id).value='';});document.getElementById('fCategory').value='whatsapp';document.getElementById('formTitle').innerText='ADD NEW APP';document.getElementById('saveBtnText').innerText='SAVE APP';document.getElementById('iconPreview').style.display='none';}
+function resetRtForm(){['rtEditId','rtName','rtDesc','rtUrl'].forEach(function(id){document.getElementById(id).value='';});document.getElementById('rtType').value='free';document.getElementById('rtIconType').value='basic';document.getElementById('rtSaveBtnText').innerText='SAVE TOOL';}
+function resetPkForm(){['pkEditId','pkKey','pkNote'].forEach(function(id){document.getElementById(id).value='';});document.getElementById('pkPlan').value='weekly';document.getElementById('pkExpiry').value='';document.getElementById('pkSaveBtnText').innerText='GENERATE KEY';}
+function generateRandomKey(){
+    var chars='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    function seg(n){var s='';for(var i=0;i<n;i++)s+=chars[Math.floor(Math.random()*chars.length)];return s;}
+    var key='W-MALG-'+seg(4)+'-'+seg(4)+'-'+seg(4);
+    document.getElementById('pkKey').value=key;
+    // Default expiry 7 days from now
+    var d=new Date();d.setDate(d.getDate()+7);
+    document.getElementById('pkExpiry').value=d.toISOString().split('T')[0];
+    showToast('🔑 Key Generate Ho Gayi!');
+}
+function filterPkList(f,b){
+    document.querySelectorAll('#pkTabRow .tab-btn').forEach(function(x){x.classList.remove('active');});
+    if(b)b.classList.add('active');
+    renderPkList(f);
+}
+function renderPkList(filter){
+    var list=document.getElementById('proKeysList');
+    var data=window.proKeysData||[];
+    if(filter!=='all') data=data.filter(function(k){return k.status===filter;});
+    if(!data.length){list.innerHTML='<div class="empty-state">Koi key nahi hai</div>';return;}
+    list.innerHTML=data.map(function(k){
+        var exp=k.expiresAt?new Date(k.expiresAt).toLocaleDateString('en-PK',{day:'2-digit',month:'short',year:'numeric'}):'N/A';
+        var isExpired=k.expiresAt&&new Date(k.expiresAt)<new Date();
+        var statusColor=k.status==='active'&&!isExpired?'var(--neon-green)':k.status==='used'?'#00f3ff':'var(--danger)';
+        var statusLabel=isExpired?'EXPIRED':k.status.toUpperCase();
+        var copyBtn='<button class="btn-icon" style="color:var(--neon-blue);" onclick="copyKeyText(\''+k.key+'\')"><i class="fas fa-copy"></i></button>';
+        var revokeBtn=k.status!=='revoked'?'<button class="btn-icon" style="color:orange;" onclick="revokeProKey(\''+k.firebaseKey+'\')"><i class="fas fa-ban"></i></button>':'';
+        return '<div class="tool-item">'
+            +'<div class="tool-item-icon" style="background:linear-gradient(135deg,#1565C0,#0d47a1);font-size:1rem;"><i class="fas fa-crown"></i></div>'
+            +'<div class="tool-item-info" style="min-width:0;">'
+            +'<h4 style="font-size:0.85rem;word-break:break-all;">'+escA(k.key)+'</h4>'
+            +'<p>'+escA(k.plan||'')+(k.note?' • '+escA(k.note):'')+'</p>'
+            +'<p>Exp: '+exp+(k.usedBy?' • <span style="color:#00f3ff">Used</span>':'')+' <span style="color:'+statusColor+';font-weight:900;">'+statusLabel+'</span></p>'
+            +'</div>'
+            +'<div class="app-actions">'
+            +copyBtn
+            +'<button class="btn-icon btn-edit" onclick="editProKey(\''+k.firebaseKey+'\')"><i class="fas fa-pen"></i></button>'
+            +revokeBtn
+            +'<button class="btn-icon btn-del" onclick="deleteProKey(\''+k.firebaseKey+'\')"><i class="fas fa-trash"></i></button>'
+            +'</div></div>';
+    }).join('');
+}
+function copyKeyText(key){navigator.clipboard.writeText(key).then(function(){showToast('✅ Key Copy Ho Gayi: '+key);}).catch(function(){showToast(key);});}
 function previewIcon(url){if(url){document.getElementById('iconPreviewImg').src=url;document.getElementById('iconPreview').style.display='block';}}
 function showToast(msg){var t=document.getElementById('toast');t.style.display='block';t.innerText=msg;setTimeout(function(){t.style.display='none';},2500);}
 </script>
